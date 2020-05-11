@@ -1,2 +1,2 @@
 # Nick.TodoList
-SpringBoot &amp; MySql &amp; thymeleaf
+SpringBoot &amp;MySql&amp;thymeleaf
