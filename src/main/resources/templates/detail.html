@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body th:object="${task}">
+    <h1>Detail</h1>
+
+    <div>
+        <p>
+            <strong><span th:text="*{title}"></span></strong>
+        </p>
+        <p>
+            <strong><span th:text="*{description}"></span></strong>
+        </p>
+        <p>
+            <strong><span th:text="*{deadLine}"></span></strong>
+        </p>
+        <p>
+            <strong><span th:text="*{createDate}"></span></strong>
+        </p>
+    </div>
+</body>
+</html>
