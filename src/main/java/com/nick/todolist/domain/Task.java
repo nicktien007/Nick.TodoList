@@ -1,11 +1,11 @@
 package com.nick.todolist.domain;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
+import lombok.Value;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.swing.text.html.Option;
 import java.util.Date;
 
 @Data
@@ -22,4 +22,6 @@ public class Task {
     private Date deadLine;
 
     private Date createDate;
+
+    private Boolean done;
 }

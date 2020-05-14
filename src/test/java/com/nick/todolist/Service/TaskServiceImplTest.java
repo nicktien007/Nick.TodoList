@@ -27,10 +27,11 @@ class TaskServiceImplTest {
     @Test
     void saveTaskTest() {
         Task task = new Task();
-        task.setTitle("task13");
-        task.setDescription("desc3");
+        task.setTitle("task1");
+        task.setDescription("desc1");
         task.setDeadLine(DateUtil.now());
         task.setCreateDate(DateUtil.now());
+        task.setDone(false);
 
         repo.save(task);
     }
