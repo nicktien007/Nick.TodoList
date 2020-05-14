@@ -27,8 +27,8 @@ class TaskServiceImplTest {
     @Test
     void saveTaskTest() {
         Task task = new Task();
-        task.setTitle("task1");
-        task.setDescription("desc1");
+        task.setTitle("task4");
+        task.setDescription("desc4");
         task.setDeadLine(DateUtil.now());
         task.setCreateDate(DateUtil.now());
         task.setDone(false);

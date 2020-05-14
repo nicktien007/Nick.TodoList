@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class TaskController {
@@ -15,7 +17,11 @@ public class TaskController {
     private final TaskService service;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+
+        List<Task> tasks = service.findAllTasks();
+        model.addAttribute("tasks", tasks);
+
         return "tasks";
     }
 
