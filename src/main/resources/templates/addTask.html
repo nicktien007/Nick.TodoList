@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
+
+</head>
+<body th:object="${task}">
+
+    <div class="container">
+        <h1>Add Task</h1>
+
+        <form action="/addTask" method="post">
+            <div class="form-group">
+                <label for="titleId">Title</label>
+                <input type="text" name="title" id="titleId" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="descId">Description</label>
+                <input type="text" name="description" id="descId" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="deadLineId">DeadLineId</label>
+                <input type="datetime-local" name="deadLine" id="deadLineId" class="form-control">
+            </div>
+            <p class="text-center">
+                <button type="submit" class="btn btn-primary">送出</button>
+            </p>
+        </form>
+
+    </div>
+
+    <script th:src="@{/js/jquery-3.5.1.min.js}" src="../static/js/jquery-3.5.1.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>

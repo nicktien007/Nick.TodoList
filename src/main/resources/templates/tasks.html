@@ -8,6 +8,7 @@
 <body>
 <div class="container">
     <h2 class="page-link">待辦清單</h2>
+    <p class="text-right"><a th:href="@{/tasks/addTask}" class="btn btn-primary ">新增</a></p>
     <table class="table-bordered table table-hover">
         <thead>
         <tr>
@@ -25,7 +26,7 @@
             <td ><a th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></td>
             <td th:text="${task.description}">d1</td>
             <td th:text="${task.createDate}">CreateDate1</td>
-            <td th:text="${task.createDate}">CreateDate1</td>
+            <td th:text="${task.deadLine}">DeadLine2</td>
             <td th:text="${task.done}">isDone1</td>
         </tr>
         </tbody>
