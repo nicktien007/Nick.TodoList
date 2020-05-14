@@ -21,8 +21,8 @@
         </thead>
         <tbody>
         <tr th:each="task,iterStat :${tasks}" th:class="${task.done}?'alert-success':'alert-danger'" class="alert-success">
-            <td th:text="${iterStat.count}">t1</td>
-            <td th:text="${task.title}">t1</td>
+            <td th:text="${iterStat.count}"></td>
+            <td ><a th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></td>
             <td th:text="${task.description}">d1</td>
             <td th:text="${task.createDate}">CreateDate1</td>
             <td th:text="${task.createDate}">CreateDate1</td>
