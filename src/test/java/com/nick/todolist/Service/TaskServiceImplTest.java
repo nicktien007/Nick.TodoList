@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,8 +30,8 @@ class TaskServiceImplTest {
         Task task = new Task();
         task.setTitle("task4");
         task.setDescription("desc4");
-        task.setDeadLine(DateUtil.now());
-        task.setCreateDate(DateUtil.now());
+        task.setDeadLine(LocalDateTime.now());
+        task.setCreateDate(LocalDateTime.now());
         task.setDone(false);
 
         repo.save(task);

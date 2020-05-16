@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.swing.text.html.Option;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -22,9 +23,11 @@ public class Task {
     private String description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private Date deadLine;
+    @Column(nullable = false)
+    private LocalDateTime deadLine;
 
     private LocalDateTime createDate = LocalDateTime.now();
 
-    private Boolean done;
+    @Column(nullable = false)
+    private Boolean done = false;
 }
