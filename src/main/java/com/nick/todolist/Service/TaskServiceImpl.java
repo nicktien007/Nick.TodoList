@@ -3,6 +3,8 @@ package com.nick.todolist.Service;
 import com.nick.todolist.domain.Task;
 import com.nick.todolist.domain.TaskRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findAllTasks() {
         return repo.findAll();
+    }
+
+    @Override
+    public Page<Task> findAllByPage(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
     @Override

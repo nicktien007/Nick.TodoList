@@ -3,13 +3,18 @@ package com.nick.todolist.web;
 import com.nick.todolist.Service.TaskService;
 import com.nick.todolist.domain.Task;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
@@ -19,10 +24,14 @@ public class TaskController {
     private final TaskService service;
 
     @GetMapping("/")
-    public String index(Model model) {
-
-        List<Task> tasks = service.findAllTasks();
-        model.addAttribute("tasks", tasks);
+    public String index(@PageableDefault(
+            size = 5,
+            sort = {"id"},
+            direction = Sort.Direction.DESC) Pageable pageable,
+                        Model model) {
+        //Page<Task> tasks = service.findAllByPage(PageRequest.of(page,size, Sort.Direction.DESC,"id"));
+        Page<Task> tasks = service.findAllByPage(pageable);
+        model.addAttribute("page", tasks);
 
         return "tasks";
     }
