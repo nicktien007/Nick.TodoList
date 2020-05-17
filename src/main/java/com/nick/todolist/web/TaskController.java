@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
@@ -36,7 +37,8 @@ public class TaskController {
     }
 
     @GetMapping("tasks/addTask")
-    public String addTask(){
+    public String addTask(Model model){
+        model.addAttribute("task", new Task());
         return "addTask";
     }
 
@@ -45,5 +47,13 @@ public class TaskController {
         service.saveTask(task);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/tasks/edit/{id}")
+    public String editTask(@PathVariable Long id ,Model model){
+        Task task = service.getTaskById(id);
+        model.addAttribute("task",task);
+
+        return "addTask";
     }
 }

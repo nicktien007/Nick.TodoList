@@ -18,6 +18,7 @@
             <th>CreateDate</th>
             <th>DeadLine</th>
             <th>IsDone</th>
+            <th>Operation</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +29,9 @@
             <td th:text="${task.createDate}">CreateDate1</td>
             <td th:text="${task.deadLine}">DeadLine2</td>
             <td th:text="${task.done}">isDone1</td>
+            <td>
+                <a th:href="@{'/tasks/edit/' + ${task.id}}">更新</a>
+            </td>
         </tr>
         </tbody>
     </table>

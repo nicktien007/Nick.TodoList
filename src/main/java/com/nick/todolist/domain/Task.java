@@ -24,7 +24,7 @@ public class Task {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(nullable = false)
-    private LocalDateTime deadLine;
+    private LocalDateTime deadLine = LocalDateTime.now().plusDays(1);
 
     private LocalDateTime createDate = LocalDateTime.now();
 

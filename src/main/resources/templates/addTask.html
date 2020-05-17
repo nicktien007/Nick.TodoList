@@ -11,18 +11,19 @@
     <div class="container">
         <h1>Add Task</h1>
 
-        <form action="/addTask" method="post">
+        <form action="/addTask" method="post" th:object="${task}">
+            <input type="hidden" th:value = "*{id}" name = "id">
             <div class="form-group">
                 <label for="titleId">Title</label>
-                <input type="text" name="title" id="titleId" class="form-control">
+                <input type="text" name="title" id="titleId" class="form-control" th:field="*{title}">
             </div>
             <div class="form-group">
                 <label for="descId">Description</label>
-                <input type="text" name="description" id="descId" class="form-control">
+                <input type="text" name = "description" id="descId" class="form-control" th:field="*{description}">
             </div>
             <div class="form-group">
                 <label for="deadLineId">DeadLineId</label>
-                <input type="datetime-local" name="deadLine" id="deadLineId" class="form-control">
+                <input type="datetime-local" name="deadLine" id="deadLineId" class="form-control" th:field="*{deadLine}">
             </div>
             <p class="text-center">
                 <button type="submit" class="btn btn-primary">送出</button>
