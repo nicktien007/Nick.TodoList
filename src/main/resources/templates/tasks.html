@@ -9,20 +9,47 @@
 <div class="container">
     <h2 class="page-link">待辦清單</h2>
     <p class="text-right"><a th:href="@{/tasks/addTask}" class="btn btn-primary ">新增</a></p>
-    <table class="table-bordered table table-hover">
+<!--    <table class="table-bordered table table-hover">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>#</th>-->
+<!--            <th>Title</th>-->
+<!--            <th>Desc</th>-->
+<!--            <th>CreateDate</th>-->
+<!--            <th>DeadLine</th>-->
+<!--            <th>IsDone</th>-->
+<!--            <th>Operation</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="task,iterStat :${page.content}" th:class="${task.done}?'alert-success':'alert-danger'" class="alert-success">-->
+<!--            <td th:text="${iterStat.count}"></td>-->
+<!--            <td ><a th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></td>-->
+<!--            <td th:text="${task.description}">d1</td>-->
+<!--            <td th:text="${task.createDate}">CreateDate1</td>-->
+<!--            <td th:text="${task.deadLine}">DeadLine2</td>-->
+<!--            <td th:text="${task.done}">isDone1</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{'/tasks/edit/' + ${task.id}}">更新</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Desc</th>
-            <th>CreateDate</th>
-            <th>DeadLine</th>
-            <th>IsDone</th>
-            <th>Operation</th>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Desc</th>
+            <th scope="col">CreateDate</th>
+            <th scope="col">DeadLine</th>
+            <th scope="col">IsDone</th>
+            <th scope="col">Operation</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="task,iterStat :${page.content}" th:class="${task.done}?'alert-success':'alert-danger'" class="alert-success">
+        <tr th:each="task,iterStat :${page.content}">
             <td th:text="${iterStat.count}"></td>
             <td ><a th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></td>
             <td th:text="${task.description}">d1</td>
