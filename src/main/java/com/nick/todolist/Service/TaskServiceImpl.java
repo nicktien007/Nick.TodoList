@@ -1,5 +1,6 @@
 package com.nick.todolist.Service;
 
+import com.nick.todolist.ViewModel.TaskVM;
 import com.nick.todolist.domain.Task;
 import com.nick.todolist.domain.TaskRepo;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Page<Task> findAllByPage(Pageable pageable) {
-        return repo.findAll(pageable);
+    public Page<TaskVM> findAllByPage(Pageable pageable) {
+        Page<Task> taskPage = repo.findAll(pageable);
+        Page<TaskVM> taskVMpage = taskPage.map(x -> TaskVM.builder()
+                .id(x.getId())
+                .title(x.getTitle())
+                .description(x.getDescription())
+                .createDate(x.getCreateDate())
+                .deadLine(x.getDeadLine())
+                .done(x.getDone())
+                .build());
+
+        return taskVMpage;
     }
 
     @Override

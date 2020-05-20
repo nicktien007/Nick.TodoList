@@ -1,6 +1,7 @@
 package com.nick.todolist.web;
 
 import com.nick.todolist.Service.TaskService;
+import com.nick.todolist.ViewModel.TaskVM;
 import com.nick.todolist.domain.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class TaskController {
             direction = Sort.Direction.DESC) Pageable pageable,
                         Model model) {
         //Page<Task> tasks = service.findAllByPage(PageRequest.of(page,size, Sort.Direction.DESC,"id"));
-        Page<Task> tasks = service.findAllByPage(pageable);
+        Page<TaskVM> tasks = service.findAllByPage(pageable);
         model.addAttribute("page", tasks);
 
         return "tasks";

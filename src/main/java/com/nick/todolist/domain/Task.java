@@ -1,15 +1,10 @@
 package com.nick.todolist.domain;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
-import lombok.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.swing.text.html.Option;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity

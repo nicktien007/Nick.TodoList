@@ -1,6 +1,7 @@
 package com.nick.todolist.api;
 
 import com.nick.todolist.Service.TaskService;
+import com.nick.todolist.ViewModel.TaskVM;
 import com.nick.todolist.domain.Task;
 import com.nick.todolist.utils.CopyUtils;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class TaskApiController {
 
     @GetMapping("/tasksByPage")
     public ResponseEntity<?> getAllTasksByPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<Task> taskPage = service.findAllByPage(PageRequest.of(page, size, Sort.Direction.DESC, "id"));
+        Page<TaskVM> taskPage = service.findAllByPage(PageRequest.of(page, size, Sort.Direction.DESC, "id"));
         return new ResponseEntity<>(taskPage,HttpStatus.OK);
     }
 

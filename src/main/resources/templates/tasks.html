@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="page-link">待辦清單</h2>
+    <h2 class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">待辦清單</h2>
     <p class="text-right"><a th:href="@{/tasks/addTask}" class="btn btn-primary ">新增</a></p>
 <!--    <table class="table-bordered table table-hover">-->
 <!--        <thead>-->
@@ -46,15 +46,15 @@
             <th scope="col">DeadLine</th>
             <th scope="col">IsDone</th>
             <th scope="col">Operation</th>
-        </tr>
+        </tr>∂
         </thead>
         <tbody>
-        <tr th:each="task,iterStat :${page.content}">
+        <tr th:each="task,iterStat :${page.content}" >
             <td th:text="${iterStat.count}"></td>
-            <td ><a th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></td>
+            <th class="row" ><a class="p-2 text-dark" th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></th>
             <td th:text="${task.description}">d1</td>
             <td th:text="${task.createDate}">CreateDate1</td>
-            <td th:text="${task.deadLine}">DeadLine2</td>
+            <td th:text="${task.deadLine}" th:class="${task.isWarning}?'text-danger'">DeadLine2</td>
             <td th:text="${task.done}">isDone1</td>
             <td>
                 <a th:href="@{'/tasks/edit/' + ${task.id}}">更新</a>
