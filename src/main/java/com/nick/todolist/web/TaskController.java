@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,13 +28,12 @@ public class TaskController {
     @GetMapping("/")
     public String index(@PageableDefault(
             size = 5,
-            sort = {"id"},
+            sort = {"createDate"},
             direction = Sort.Direction.DESC) Pageable pageable,
                         Model model) {
         //Page<Task> tasks = service.findAllByPage(PageRequest.of(page,size, Sort.Direction.DESC,"id"));
         Page<TaskVM> tasks = service.findAllByPage(pageable);
         model.addAttribute("page", tasks);
-
         return "tasks";
     }
 
@@ -65,5 +65,11 @@ public class TaskController {
         model.addAttribute("task",task);
 
         return "addTask";
+    }
+
+    @GetMapping("/tasks/delete/{id}")
+    public String delTask(@PathVariable Long id, @RequestParam int page){
+        service.deleteTaskById(id);
+        return "redirect:/"+"?page="+page;
     }
 }

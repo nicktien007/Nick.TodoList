@@ -16,14 +16,8 @@
                 <li class="list-group-item">Description：<span th:text="*{description}"></span></li>
                 <li class="list-group-item">DeadLine：<span th:text="*{deadLine}"></span></li>
                 <li class="list-group-item">CreateDate：<span th:text="*{createDate}"></span></li>
+                <li class="list-group-item">Status：<span th:class="${!task.done}?'text-danger'" th:text="*{done}?'完成':'未完成'"></span></li>
             </ul>
-            <div class="alert-success" th:if="${task.done}">
-                <div>完成</div>
-            </div>
-
-            <div th:unless="${task.done}">
-                <div class="alert-danger">沒完成</div>
-            </div>
         </div>
 
 

@@ -2,6 +2,7 @@ package com.nick.todolist.ViewModel;
 
 import lombok.Builder;
 import lombok.Data;
+import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
 
 import java.time.LocalDateTime;
 
@@ -15,13 +16,12 @@ public class TaskVM {
 
     private final String description;
 
-    private final LocalDateTime deadLine ;
+    private final String deadLine ;
 
-    private final LocalDateTime createDate ;
+    private final String createDate ;
 
-    private final Boolean done ;
+    private final boolean done ;
 
-    public boolean getIsWarning(){
-        return this.deadLine.isBefore(LocalDateTime.now());
-    }
+    private final Boolean isWarning;
+
 }

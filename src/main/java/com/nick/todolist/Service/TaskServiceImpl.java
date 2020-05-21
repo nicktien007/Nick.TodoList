@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,9 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskRepo repo;
 
+    public static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
     @Override
     public List<Task> findAllTasks() {
         return repo.findAll();
@@ -25,16 +30,22 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Page<TaskVM> findAllByPage(Pageable pageable) {
         Page<Task> taskPage = repo.findAll(pageable);
-        Page<TaskVM> taskVMpage = taskPage.map(x -> TaskVM.builder()
+
+        return taskPage.map(this::getTaskVm);
+    }
+
+    private TaskVM getTaskVm(Task x) {
+        return TaskVM.builder()
                 .id(x.getId())
                 .title(x.getTitle())
-                .description(x.getDescription())
-                .createDate(x.getCreateDate())
-                .deadLine(x.getDeadLine())
+                .description(x.getDescription().length() > 15
+                        ? x.getDescription().substring(0,15) + "..."
+                        : x.getDescription())
+                .createDate(DATE_FMT.format(x.getCreateDate()))
+                .deadLine(DATE_FMT.format(x.getDeadLine()))
                 .done(x.getDone())
-                .build());
-
-        return taskVMpage;
+                .isWarning(x.getDeadLine().isBefore(LocalDateTime.now()) && !x.getDone())
+                .build();
     }
 
     @Override
