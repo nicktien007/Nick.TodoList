@@ -14,6 +14,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col"></th>
             <th scope="col">Title</th>
             <th scope="col">Desc</th>
             <th scope="col">CreateDate</th>
@@ -26,7 +27,15 @@
         <tbody>
         <tr th:each="task,iterStat :${page.content}" th:class="${task.done}?'text-black-50'">
             <td th:text="${iterStat.count}"></td>
-            <th class="row" ><a class="p-2 text-dark" th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></th>
+            <td>
+                <a th:if="${task.done}" th:href="@{'/tasks/tagNotDone/' + ${task.id} + '?page=' + ${page.number}}">
+                    <i class="far fa-check-square a-lg"></i>
+                </a>
+                <a th:if="${!task.done}" th:href="@{'/tasks/tagDone/' + ${task.id} + '?page=' + ${page.number}}">
+                    <i class="far fa-square a-lg"></i>
+                </a>
+            </td>
+            <th class="row" ><a class=" text-dark" th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></th>
             <td th:text="${task.description}">d1</td>
             <td th:text="${task.createDate}">CreateDate1</td>
             <td th:text="${task.deadLine}" th:class="${task.isWarning}?'text-danger'">DeadLine2</td>

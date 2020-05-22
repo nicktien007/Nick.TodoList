@@ -20,4 +20,11 @@ public interface TaskService {
     Task updateTask(Task task);
 
     void deleteTaskById(Long id);
+
+    void deleteAllTask();
+
+    void tagDone(Long id);
+
+    void tagNotDone(Long id);
+
  }

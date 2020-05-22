@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -54,18 +56,43 @@ public class TaskServiceImpl implements TaskService {
         return optionalTask.orElse(new Task());
     }
 
+    @Transactional
     @Override
     public Task saveTask(Task task) {
         return repo.save(task);
     }
 
+    @Transactional
     @Override
     public Task updateTask(Task task) {
         return repo.save(task);
     }
 
+    @Transactional
     @Override
     public void deleteTaskById(Long id) {
         repo.deleteById(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteAllTask() {
+        repo.deleteAll();
+    }
+
+    @Transactional
+    @Override
+    public void tagDone(Long id) {
+        Task task = this.getTaskById(id);
+        task.setDone(true);
+        this.saveTask(task);
+    }
+
+    @Transactional
+    @Override
+    public void tagNotDone(Long id) {
+        Task task = this.getTaskById(id);
+        task.setDone(false);
+        this.saveTask(task);
     }
 }
