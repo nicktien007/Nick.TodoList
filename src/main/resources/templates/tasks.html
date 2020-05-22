@@ -9,7 +9,10 @@
 <body>
 <div class="container">
     <h2 class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">待辦清單</h2>
-    <p class="text-right"><a th:href="@{/tasks/addTask}" class="btn btn-primary ">新增</a></p>
+    <p class="text-right">
+        <a  href="javascript:if(confirm('確實要刪除嗎?'))location='/tasks/deleteAll'" class="btn btn-danger">全部刪除</a>
+        <a th:href="@{/tasks/addTask}" class="btn btn-primary ">新增</a>
+    </p>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -19,7 +22,7 @@
             <th scope="col">Desc</th>
             <th scope="col">CreateDate</th>
             <th scope="col">DeadLine</th>
-            <th scope="col">IsDone</th>
+<!--            <th scope="col">IsDone</th>-->
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
@@ -35,11 +38,11 @@
                     <i class="far fa-square a-lg"></i>
                 </a>
             </td>
-            <th class="row" ><a class=" text-dark" th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></th>
+            <th class="row" ><a th:class="${task.done} ? 'text-black-50' : 'text-dark'" th:text="${task.title}" th:href="@{'/tasks/' + ${task.id}}"></a></th>
             <td th:text="${task.description}">d1</td>
             <td th:text="${task.createDate}">CreateDate1</td>
             <td th:text="${task.deadLine}" th:class="${task.isWarning}?'text-danger'">DeadLine2</td>
-            <td th:text="${task.done}?'已完成':'未完成'">isDone1</td>
+<!--            <td th:text="${task.done}?'已完成':'未完成'">isDone1</td>-->
             <td>
                 <a th:href="@{'/tasks/edit/' + ${task.id}}">
                     <i class="fas fa-edit"></i>
@@ -59,7 +62,7 @@
             <li class="page-item"  th:class="${page.first}?'page-item disabled':'page-item'">
                 <a class="page-link " href="#" th:href="@{'/?page='+${page.number-1}}">上一頁</a>
             </li>
-            <li class="page-item " th:each="c:${#numbers.sequence(1, page.totalPages)}">
+            <li class="page-item" th:if="${page.totalPages >= 1}" th:each="c:${#numbers.sequence(1, page.totalPages)}">
                 <a class="page-link" href="#" th:text="${c}" th:href="@{'/?page='+${c-1}}"></a>
             </li>
             <li class="page-item" th:if="${c==totalPages}" th:class="${page.last}?'page-item disabled':'page-item'">
