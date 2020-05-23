@@ -9,10 +9,21 @@
 <body>
 <div class="container">
     <h2 class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">待辦清單</h2>
-    <p class="text-right">
-        <a  href="javascript:if(confirm('確實要刪除嗎?'))location='/tasks/deleteAll'" class="btn btn-danger">全部刪除</a>
-        <a th:href="@{/tasks/addTask}" class="btn btn-primary ">新增</a>
-    </p>
+    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group" role="group" aria-label="First group">
+            <a th:href="@{/?type=All}" class="btn btn-outline-success text-left">全部</a>
+            <a th:href="@{/?type=Done}" class="btn btn-outline-success">已完成</a>
+            <a th:href="@{/?type=NotDone}" class="btn btn-outline-success ">未完成</a>
+        </div>
+
+        <div class="btn-group" role="group" aria-label="First group">
+            <a  href="javascript:if(confirm('確實要刪除嗎?'))location='/tasks/deleteAll'" class="btn btn-outline-danger">全部刪除</a>
+            &nbsp;
+            <a th:href="@{/tasks/addTask}" class="btn btn-outline-primary ">新增</a>
+        </div>
+
+    </div>
+    <p></p>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -31,10 +42,10 @@
         <tr th:each="task,iterStat :${page.content}" th:class="${task.done}?'text-black-50'">
             <td th:text="${iterStat.count}"></td>
             <td>
-                <a th:if="${task.done}" th:href="@{'/tasks/tagNotDone/' + ${task.id} + '?page=' + ${page.number}}">
+                <a th:if="${task.done}" th:href="@{'/tasks/tagNotDone/' + ${task.id} + '?page=' + ${page.number} + '&type=' + ${type}}">
                     <i class="far fa-check-square a-lg"></i>
                 </a>
-                <a th:if="${!task.done}" th:href="@{'/tasks/tagDone/' + ${task.id} + '?page=' + ${page.number}}">
+                <a th:if="${!task.done}" th:href="@{'/tasks/tagDone/' + ${task.id} + '?page=' + ${page.number} + '&type=' + ${type}}">
                     <i class="far fa-square a-lg"></i>
                 </a>
             </td>
@@ -49,7 +60,7 @@
                 </a>
             </td>
             <td>
-                <a th:href="@{'/tasks/delete/' + ${task.id} + '?page=' + ${page.number}}  ">
+                <a th:href="@{'/tasks/delete/' + ${task.id} + '?page=' + ${page.number} + '&type=' + ${type} } ">
                     <i class="far fa-trash-alt" style="color: Tomato;"></i>
                 </a>
             </td>
@@ -60,13 +71,13 @@
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center" >
             <li class="page-item"  th:class="${page.first}?'page-item disabled':'page-item'">
-                <a class="page-link " href="#" th:href="@{'/?page='+${page.number-1}}">上一頁</a>
+                <a class="page-link " href="#" th:href="@{'/?page='+${page.number-1} + '&type=' + ${type}}">上一頁</a>
             </li>
             <li class="page-item" th:if="${page.totalPages >= 1}" th:each="c:${#numbers.sequence(1, page.totalPages)}">
-                <a class="page-link" href="#" th:text="${c}" th:href="@{'/?page='+${c-1}}"></a>
+                <a class="page-link" href="#" th:text="${c}" th:href="@{'/?page='+${c-1} + '&type=' + ${type}}"></a>
             </li>
             <li class="page-item" th:if="${c==totalPages}" th:class="${page.last}?'page-item disabled':'page-item'">
-                <a class="page-link" href="#" th:href="@{'/?page='+${page.number+1}}">下一頁</a>
+                <a class="page-link" href="#" th:href="@{'/?page='+${page.number+1} + '&type=' + ${type}}">下一頁</a>
             </li>
         </ul>
     </nav>

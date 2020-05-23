@@ -2,6 +2,7 @@ package com.nick.todolist.Service;
 
 import com.nick.todolist.ViewModel.TaskVM;
 import com.nick.todolist.domain.Task;
+import com.nick.todolist.enums.TaskListType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +12,9 @@ public interface TaskService {
 
     List<Task> findAllTasks();
 
-    Page<TaskVM> findAllByPage(Pageable pageable);
+    Page<TaskVM> findAllByPage(Pageable pageable , TaskListType type);
+
+    Page<TaskVM> findAllByPageAndDone(Pageable pageable, boolean done);
 
     Task getTaskById(Long id);
 

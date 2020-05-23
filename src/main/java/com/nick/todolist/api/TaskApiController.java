@@ -3,13 +3,11 @@ package com.nick.todolist.api;
 import com.nick.todolist.Service.TaskService;
 import com.nick.todolist.ViewModel.TaskVM;
 import com.nick.todolist.domain.Task;
+import com.nick.todolist.enums.TaskListType;
 import com.nick.todolist.utils.CopyUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +30,7 @@ public class TaskApiController {
 
     @GetMapping("/tasksByPage")
     public ResponseEntity<?> getAllTasksByPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size){
-        Page<TaskVM> taskPage = service.findAllByPage(PageRequest.of(page, size, Sort.Direction.DESC, "id"));
+        Page<TaskVM> taskPage = service.findAllByPage(PageRequest.of(page, size, Sort.Direction.DESC, "id"), TaskListType.All);
         return new ResponseEntity<>(taskPage,HttpStatus.OK);
     }
 

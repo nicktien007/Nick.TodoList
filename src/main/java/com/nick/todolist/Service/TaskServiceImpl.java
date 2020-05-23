@@ -3,13 +3,13 @@ package com.nick.todolist.Service;
 import com.nick.todolist.ViewModel.TaskVM;
 import com.nick.todolist.domain.Task;
 import com.nick.todolist.domain.TaskRepo;
+import com.nick.todolist.enums.TaskListType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -30,13 +30,32 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Page<TaskVM> findAllByPage(Pageable pageable) {
-        Page<Task> taskPage = repo.findAll(pageable);
+    public Page<TaskVM> findAllByPage(Pageable pageable , TaskListType type) {
+        Page<Task> taskPage = null;
 
-        return taskPage.map(this::getTaskVm);
+        switch (type) {
+            case All:
+                taskPage = repo.findAll(pageable);
+                break;
+            case Done:
+                taskPage = repo.findAllByDone(pageable,true);
+                break;
+            case NotDone:
+                taskPage = repo.findAllByDone(pageable,false);
+            break;
+        }
+
+        return taskPage.map(this::toTaskVm);
     }
 
-    private TaskVM getTaskVm(Task x) {
+    @Override
+    public Page<TaskVM> findAllByPageAndDone(Pageable pageable, boolean done) {
+        Page<Task> taskPage = repo.findAllByDone(pageable, done);
+
+        return taskPage.map(this::toTaskVm);
+    }
+
+    private TaskVM toTaskVm(Task x) {
         return TaskVM.builder()
                 .id(x.getId())
                 .title(x.getTitle())
